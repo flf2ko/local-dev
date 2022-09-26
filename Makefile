@@ -8,9 +8,19 @@ cilium:
 cilium-test:
 	cilium connectivity test
 
+argocd:
+	kubectl apply -k manifests/argocd
+
+# kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
 ingress:
-	# kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
-	kubectl apply -k manifests/ingress
+	kubectl apply -k manifests/ingress-nginx
+
+# https://github.com/nginxinc/nginx-kubernetes-gateway/blob/main/docs/installation.md
+nginx-gateway:
+	kubectl apply -k manifests/nginx-gateway
+
+nginx-gateway-usage:
+	kubectl apply -k manifests/nginx-gateway/example
 
 coroot:
 	kubectl apply -f https://raw.githubusercontent.com/coroot/coroot/main/manifests/coroot.yaml
