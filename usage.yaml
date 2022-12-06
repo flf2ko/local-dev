@@ -68,15 +68,15 @@ metadata:
   name: example-ingress
 spec:
   rules:
-    - host: argocd.local.kind
-      http:
+    - http:
         paths:
           - pathType: Prefix
             path: "/"
             backend:
               service:
-                name: argocd-server
+                name: foo-service
                 port:
                   number: 80
+      # host: argocd.local.kind
 ---
 

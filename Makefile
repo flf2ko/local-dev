@@ -1,8 +1,10 @@
 k8s:
 	# KIND_EXPERIMENTAL_DOCKER_NETWORK=host kind create cluster --config kind/k8s-dev.yaml
+	# brew install kind
 	kind create cluster --config kind/k8s-dev.yaml
 
 cilium:
+	# brew install cilium-cli
 	cilium install
 
 cilium-test:
@@ -26,7 +28,8 @@ coroot:
 	kubectl apply -f https://raw.githubusercontent.com/coroot/coroot/main/manifests/coroot.yaml
 
 ingress-usage:
-	kubectl apply -f https://kind.sigs.k8s.io/examples/ingress/usage.yaml
+	# kubectl apply -f https://kind.sigs.k8s.io/examples/ingress/usage.yaml
+	kubectl apply -f usage.yaml
 
 all: k8s cilium ingress coroot
 

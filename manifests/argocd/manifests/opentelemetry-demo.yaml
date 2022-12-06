@@ -1,0 +1,28 @@
+# Reference: https://github.com/open-telemetry/opentelemetry-demo
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: opentelemetry-demo
+  namespace: argocd
+  labels:
+    flf2ko/project: opentelemetry-demo
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    chart: opentelemetry-demo
+    repoURL: https://open-telemetry.github.io/opentelemetry-helm-charts
+    targetRevision: ">0.1.0"
+    helm:
+      releaseName: my-otel-demo
+  destination:
+    name: in-cluster
+    namespace: otel
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated:
+      prune: true
+      selfHeal: true
