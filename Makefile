@@ -10,6 +10,7 @@ cilium:
 cilium-test:
 	cilium connectivity test
 
+# You have to deploy twice. First time is for CRD
 argocd:
 	kubectl apply -k manifests/argocd
 
