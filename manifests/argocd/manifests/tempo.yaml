@@ -1,0 +1,28 @@
+# Reference: https://github.com/open-telemetry/opentelemetry-demo
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: tempo
+  namespace: argocd
+  labels:
+    flf2ko/project: tempo
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    chart: tempo-distributed
+    repoURL: https://grafana.github.io/helm-charts
+    targetRevision: "0.27.10"
+    helm:
+      releaseName: tempo-distributed
+  destination:
+    name: in-cluster
+    namespace: tempo
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated:
+      prune: true
+      selfHeal: true
